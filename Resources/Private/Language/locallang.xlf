@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2015-01-26T11:28:09Z" product-name="reint_ttnewsdamtofal">
+		<header/>
+		<body>
+			<trans-unit id="tx_reintttnewsdamtofal_domain_model_converter" xml:space="preserve">
+				<source>Converter</source>
+			</trans-unit>
+			<trans-unit id="head" xml:space="preserve">
+				<source>Welcome to tt_news DAM to FAL converter</source>
+			</trans-unit>
+			<trans-unit id="text" xml:space="preserve">
+				<source>Start the job with clicking on the button below. Make sure, the the tables 'tt_news', 'sys_file' and 'tx_dam' exist in your database! Make sure, you have a dump of all data before you start!</source>
+			</trans-unit>
+			<trans-unit id="head1" xml:space="preserve">
+				<source>Job done, start again</source>
+			</trans-unit>
+			<trans-unit id="text1" xml:space="preserve">
+				<source>tt_news records were converted from DAM to FAL. There are still records to convert.</source>
+			</trans-unit>
+			<trans-unit id="head2" xml:space="preserve">
+				<source>Job done</source>
+			</trans-unit>
+			<trans-unit id="text2" xml:space="preserve">
+				<source>All media elements in tt_news records are now converted from DAM to FAL.</source>
+			</trans-unit>
+			<trans-unit id="convertnum" xml:space="preserve">
+				<source>Number of items to convert:</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

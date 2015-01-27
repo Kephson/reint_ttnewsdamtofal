@@ -1,0 +1,23 @@
+<f:be.container addCssFile="{f:uri.resource(path:'Css/styles.css')}">
+
+	<div class="ttnewsconv">
+
+		<h1><f:translate key="head" /></h1>
+		<p><f:translate key="text" /></p>
+
+		<f:form action="convert" additionalAttributes="{autocomplete:'off'}" class="startform">
+			<f:form.hidden name="tx_reintttnewsdamtofal_tools_reintttnewsdamtofalreintttnewsconv[start]" value="convert" />
+			<div class="ttnewsconvFormLine">
+				<label for="convertnum"><f:translate key="convertnum" /></label>
+				<f:form.select id="convertnum" name="tx_reintttnewsdamtofal_tools_reintttnewsdamtofalreintttnewsconv[convertnum]" options="{100: '100 elements',200: '200 elements',500: '500 elements',1000: '1000 elements'}" />
+			</div>
+			<div class="ttnewsconvFormLine">
+				<f:form.submit value="Start conversion"></f:form.submit>
+			</div>
+		</f:form>
+		
+		<f:flashMessages renderMode="div" />
+
+	</div>
+
+</f:be.container>

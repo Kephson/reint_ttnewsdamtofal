@@ -1,0 +1,17 @@
+.ttnewsconv {
+	padding:30px;
+}
+
+.ttnewsconv .startform {
+	margin:20px 0;
+	width:100%;
+	clear:both;
+	overflow:hidden;
+}
+
+.ttnewsconvFormLine {
+	width:100%;
+	clear:both;
+	overflow:hidden;
+	padding:5px 0;
+}
