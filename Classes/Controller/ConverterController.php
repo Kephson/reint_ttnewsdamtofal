@@ -127,7 +127,11 @@ class ConverterController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
 				$fal_entries_new[$k] = $tt;
 
 				$html = new \RENOLIT\ReintTtnewsdamtofal\Lib\simple_html_dom();
-				$html->load($tt['bodytext']);
+				// $html->load($tt['bodytext']);
+				// syntax: ($str, $lowercase=true, $stripRN=true, $defaultBRText=DEFAULT_BR_TEXT, $defaultSpanText=DEFAULT_SPAN_TEXT)				
+				// FIX set stripRN to false: do not remove \r\n, might be a bit harsh
+				$html->load($tt['bodytext'],true,false,"","");
+
 				$media_elements = $html->find("media");
 
 				foreach( $media_elements as $key => $m ) {
@@ -248,7 +252,17 @@ class ConverterController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
 					foreach( $media as $mk => $m ) {
 						foreach( $m->attr as $k => $a ) {
 							if( (int) $k > 0 ) {
-								$tt_news_elements[$r['uid']]['media'][$mk]['dam_id'] = (int) $k;
+								// PROBLEM:
+								// (int) $k might be any number, found in a media tag.
+								// then the last would be stored as dam_id
+								// e.g. <media 240 - - "TEXT,  Report_2014.pdf, 3.2 MB">The Report as PDF</media> 
+								// would set 3.2 as dam_id, correct would be 240
+
+								// FIX: check if dam_id is already set
+								if ( $tt_news_elements[$r['uid']]['media'][$mk]['dam_id'] == "" ) {
+									$tt_news_elements[$r['uid']]['media'][$mk]['dam_id'] = (int) $k;
+									// DebuggerUtility::var_dump("dam_id: ".$k);
+								}
 							}
 							if( $k === '_blank' ) {
 								$tt_news_elements[$r['uid']]['media'][$mk]['target'] = $k;
