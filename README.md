@@ -1,8 +1,11 @@
 Changelog
 ======================
 1.0.3 - Two fixes: Not removing newlines. More stable finding of media ID, thanks to Ulf Treger: https://github.com/ut
+
 1.0.2 - Little update of documentation, please contact me if this extension was helpful
+
 1.0.1 - Documentation update
+
 1.0.0 - initial release - converting only <media>-tags in bodytext field
 
 
