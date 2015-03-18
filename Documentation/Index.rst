@@ -18,7 +18,7 @@ tt_news DAM converter
 		reint_ttnewsdamtofal
 
 	:Version:
-		1.0.2
+		1.0.3
 
 	:Language:
 		en

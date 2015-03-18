@@ -48,10 +48,11 @@ class ConverterController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
 		if( $this->request->hasArgument('tx_reintttnewsdamtofal_tools_reintttnewsdamtofalreintttnewsconv') ) {
 			$request = $this->request->getArgument('tx_reintttnewsdamtofal_tools_reintttnewsdamtofalreintttnewsconv');
 			if( isset($request['start']) && $request['start'] === 'convert' ) {
-				
+
 				if( isset($request['convertnum']) && (int) $request['convertnum'] > 0 ) {
 					$convertnum = (int) $request['convertnum'];
-				}else {
+				}
+				else {
 					$convertnum = 100;
 				}
 				//DebuggerUtility::var_dump($convertnum);
@@ -127,7 +128,10 @@ class ConverterController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
 				$fal_entries_new[$k] = $tt;
 
 				$html = new \RENOLIT\ReintTtnewsdamtofal\Lib\simple_html_dom();
-				$html->load($tt['bodytext']);
+				// syntax: ($str, $lowercase=true, $stripRN=true, $defaultBRText=DEFAULT_BR_TEXT, $defaultSpanText=DEFAULT_SPAN_TEXT)				
+				// FIX set stripRN to false: do not remove \r\n, might be a bit harsh
+				$html->load($tt['bodytext'], true, false, "", "");
+
 				$media_elements = $html->find("media");
 
 				foreach( $media_elements as $key => $m ) {
@@ -221,7 +225,7 @@ class ConverterController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
 	 * 
 	 * @return array
 	 */
-	protected function load_tt_news_media($convertnum = 100) {
+	protected function load_tt_news_media( $convertnum = 100 ) {
 
 		$res = $GLOBALS['TYPO3_DB']->exec_SELECTgetRows(
 				'`uid`,`bodytext`', 'tt_news', '`bodytext` LIKE \'%<media %\' OR `bodytext` LIKE \'%&lt;media %\'', '`uid`', '', $convertnum
@@ -248,7 +252,16 @@ class ConverterController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
 					foreach( $media as $mk => $m ) {
 						foreach( $m->attr as $k => $a ) {
 							if( (int) $k > 0 ) {
-								$tt_news_elements[$r['uid']]['media'][$mk]['dam_id'] = (int) $k;
+								// PROBLEM:
+								// (int) $k might be any number, found in a media tag.
+								// then the last would be stored as dam_id
+								// e.g. <media 240 - - "TEXT,  Report_2014.pdf, 3.2 MB">The Report as PDF</media> 
+								// would set 3.2 as dam_id, correct would be 240
+								// FIX: check if dam_id is already set
+								if( $tt_news_elements[$r['uid']]['media'][$mk]['dam_id'] == "" ) {
+									$tt_news_elements[$r['uid']]['media'][$mk]['dam_id'] = (int) $k;
+									// DebuggerUtility::var_dump("dam_id: ".$k);
+								}
 							}
 							if( $k === '_blank' ) {
 								$tt_news_elements[$r['uid']]['media'][$mk]['target'] = $k;
@@ -273,10 +286,11 @@ class ConverterController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
 	 * @return type
 	 */
 	protected function replaceConvertedChars( $subject ) {
-		
-		$search = array('&lt;media','download &quot;','_blank &quot;','&quot;&gt;','&lt;/media&gt;');
-		$replace = array('<media','download ";','_blank ";','">','</media>');
-		
+
+		$search = array( '&lt;media', 'download &quot;', '_blank &quot;', '&quot;&gt;',
+			'&lt;/media&gt;' );
+		$replace = array( '<media', 'download ";', '_blank ";', '">', '</media>' );
+
 		return str_replace($search, $replace, $subject);
 	}
 
