@@ -18,7 +18,7 @@ tt_news DAM converter
 		reint_ttnewsdamtofal
 
 	:Version:
-		1.0.3
+		1.0.4
 
 	:Language:
 		en
@@ -59,3 +59,4 @@ tt_news DAM converter
 	Introduction/Index
 	UsersManual/Index
 	AdministratorManual/Index
+	ChangeLog/Index

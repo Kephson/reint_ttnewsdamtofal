@@ -1,5 +1,8 @@
 Changelog
 ======================
+
+1.0.4 - Bugfix update (dirty), see: https://github.com/Kephson/reint_ttnewsdamtofal/issues/3
+
 1.0.3 - Two fixes: Not removing newlines. More stable finding of media ID, thanks to Ulf Treger: https://github.com/ut
 
 1.0.2 - Little update of documentation, please contact me if this extension was helpful
