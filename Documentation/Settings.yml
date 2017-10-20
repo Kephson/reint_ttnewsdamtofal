@@ -4,10 +4,10 @@
 
 ---
 conf.py:
-  copyright: 2015
+  copyright: 2017
   project: tt_news DAM converter
-  version: 1.0.4
-  release: 1.0.4
+  version: 1.0.5
+  release: 1.0.5
   latex_documents:
   - - Index
     - reint_ttnewsdamtofal.tex

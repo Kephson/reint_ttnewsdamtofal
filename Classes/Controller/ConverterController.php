@@ -6,7 +6,7 @@ namespace RENOLIT\ReintTtnewsdamtofal\Controller;
  *
  *  Copyright notice
  *
- *  (c) 2015 Ephraim Härer <ephraim.haerer@renolit.com>, RENOLIT SE
+ *  (c) 2015-2017 Ephraim Härer <ephraim.haerer@renolit.com>, RENOLIT SE
  *
  *  All rights reserved
  *
@@ -26,7 +26,6 @@ namespace RENOLIT\ReintTtnewsdamtofal\Controller;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
-
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
@@ -35,7 +34,8 @@ use \TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 /**
  * ConverterController
  */
-class ConverterController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
+class ConverterController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+{
 
 	/**
 	 * action convert
@@ -43,7 +43,8 @@ class ConverterController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
 	 *
 	 * @return void
 	 */
-	public function convertAction() {
+	public function convertAction()
+	{
 
 		if ($this->request->hasArgument('tx_reintttnewsdamtofal_tools_reintttnewsdamtofalreintttnewsconv')) {
 			$request = $this->request->getArgument('tx_reintttnewsdamtofal_tools_reintttnewsdamtofalreintttnewsconv');
@@ -68,12 +69,12 @@ class ConverterController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
 				// warn message if there are more entries, else ok
 				if ($count > $convertnum) {
 					$message = GeneralUtility::makeInstance(
-									'TYPO3\\CMS\\Core\\Messaging\\FlashMessage', $count . ' ' . LocalizationUtility::translate('text1', 'reint_ttnewsdamtofal'), LocalizationUtility::translate('head1', 'reint_ttnewsdamtofal'), FlashMessage::WARNING, FALSE
+							'TYPO3\\CMS\\Core\\Messaging\\FlashMessage', $count . ' ' . LocalizationUtility::translate('text1', 'reint_ttnewsdamtofal'), LocalizationUtility::translate('head1', 'reint_ttnewsdamtofal'), FlashMessage::WARNING, FALSE
 					);
 				} else {
 					$message = GeneralUtility::makeInstance(
-									'TYPO3\\CMS\\Core\\Messaging\\FlashMessage', LocalizationUtility::translate('text2', 'reint_ttnewsdamtofal'), LocalizationUtility::translate('head2', 'reint_ttnewsdamtofal'), // the header is optional
-									FlashMessage::OK, FALSE
+							'TYPO3\\CMS\\Core\\Messaging\\FlashMessage', LocalizationUtility::translate('text2', 'reint_ttnewsdamtofal'), LocalizationUtility::translate('head2', 'reint_ttnewsdamtofal'), // the header is optional
+							FlashMessage::OK, FALSE
 					);
 				}
 
@@ -88,7 +89,8 @@ class ConverterController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
 	 * @param array $fal_entries
 	 * @return boolean
 	 */
-	protected function write_new_fal_data($fal_entries) {
+	protected function write_new_fal_data($fal_entries)
+	{
 
 		$into_table = 'tt_news';
 		$counter = 0;
@@ -115,7 +117,8 @@ class ConverterController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
 	 * @param array $fal_entries
 	 * @return array
 	 */
-	protected function replace_media_elements($fal_entries) {
+	protected function replace_media_elements($fal_entries)
+	{
 
 		$fal_entries_new = array();
 
@@ -159,7 +162,8 @@ class ConverterController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
 	 * @param array $dam_entries
 	 * @return array
 	 */
-	protected function get_related_fal_entries($dam_entries) {
+	protected function get_related_fal_entries($dam_entries)
+	{
 
 		$fal_entries = array();
 
@@ -173,7 +177,7 @@ class ConverterController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
 
 					if (isset($t['file_name'])) {
 						$res = $GLOBALS['TYPO3_DB']->exec_SELECTgetRows(
-								'`uid`,`identifier`', 'sys_file', '`identifier` LIKE \'%' . $t['file_name'] . '%\'', '', '', 100
+							'`uid`,`identifier`', 'sys_file', '`identifier` LIKE \'%' . $t['file_name'] . '%\'', '', '', 100
 						);
 						//DebuggerUtility::var_dump($res);
 						if (isset($res[0])) {
@@ -201,7 +205,8 @@ class ConverterController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
 	 * @param array $tt_news_elements
 	 * @return array
 	 */
-	protected function get_related_dam_entries($tt_news_elements) {
+	protected function get_related_dam_entries($tt_news_elements)
+	{
 
 		$dam_entries = array();
 
@@ -214,7 +219,7 @@ class ConverterController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
 				foreach ($tt['media'] as $tk => $t) {
 					if (isset($t['dam_id'])) {
 						$res = $GLOBALS['TYPO3_DB']->exec_SELECTgetRows(
-								'`file_name`,`file_path`', 'tx_dam', '`uid` = ' . $t['dam_id'], '', '', 100
+							'`file_name`,`file_path`', 'tx_dam', '`uid` = ' . $t['dam_id'], '', '', 100
 						);
 						//DebuggerUtility::var_dump($res);
 						if (isset($res[0])) {
@@ -242,10 +247,11 @@ class ConverterController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
 	 * 
 	 * @return array
 	 */
-	protected function load_tt_news_media($convertnum = 100) {
+	protected function load_tt_news_media($convertnum = 100)
+	{
 
 		$res = $GLOBALS['TYPO3_DB']->exec_SELECTgetRows(
-				'`uid`,`bodytext`', 'tt_news', '`bodytext` LIKE \'%<media %\' OR `bodytext` LIKE \'%&lt;media %\'', '`uid`', '', $convertnum
+			'`uid`,`bodytext`', 'tt_news', '`bodytext` LIKE \'%<media %\' OR `bodytext` LIKE \'%&lt;media %\'', '`uid`', '', $convertnum
 		);
 
 		//DebuggerUtility::var_dump($res); die();
@@ -304,7 +310,8 @@ class ConverterController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
 	 * @param type $subject
 	 * @return type
 	 */
-	protected function replaceConvertedChars($subject) {
+	protected function replaceConvertedChars($subject)
+	{
 
 		$search = array('&lt;media', 'download &quot;', '_blank &quot;', '&quot;&gt;',
 			'&lt;/media&gt;');
@@ -312,5 +319,4 @@ class ConverterController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
 
 		return str_replace($search, $replace, $subject);
 	}
-
 }

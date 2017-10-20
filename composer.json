@@ -1,0 +1,17 @@
+{
+	"name": "renolit/reint-ttnewsdamtofal",
+	"type": "typo3-cms-extension",
+	"version": "1.0.5",
+	"description": "Simple extension to convert DAM <media> entries in tt_news bodytext to FAL.",
+	"homepage": "https://www.renolit.com",
+	"license": "GPL-2.0+",
+	"keywords": ["TYPO3 CMS"],
+	"require": {
+		"typo3/cms-core": "^6.2.0"
+	},
+	"autoload": {
+		"psr-4": {
+			"RENOLIT\\ReintTtnewsdamtofal\\": "Classes"
+		}
+	}
+}

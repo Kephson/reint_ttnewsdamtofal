@@ -18,7 +18,7 @@ tt_news DAM converter
 		reint_ttnewsdamtofal
 
 	:Version:
-		1.0.4
+		release
 
 	:Language:
 		en
@@ -30,7 +30,7 @@ tt_news DAM converter
 		DAM,FAL,tt_news,converter,media,RTE,link
 
 	:Copyright:
-		2015
+		2017
 
 	:Author:
 		Ephraim Härer

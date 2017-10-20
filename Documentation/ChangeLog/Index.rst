@@ -11,6 +11,13 @@
 ChangeLog
 =========
 
+- **20.10.2017** -> 1.0.5
+
+  - Compatibility update for 7.6
+  - added composer.json file
+
+-----------------------
+
 - **16.04.2015** -> 1.0.4
 
   - Bugfix update for links in bodytext (dirty), see: https://github.com/Kephson/reint_ttnewsdamtofal/issues/3

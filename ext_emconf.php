@@ -1,5 +1,4 @@
 <?php
-
 /* * *************************************************************
  * Extension Manager/Repository config file for ext: "reint_ttnewsdamtofal"
  *
@@ -20,12 +19,10 @@ $EM_CONF[$_EXTKEY] = array(
 	'uploadfolder' => '0',
 	'createDirs' => '',
 	'clearCacheOnLoad' => 0,
-	'version' => '1.0.4',
+	'version' => '1.0.5',
 	'constraints' => array(
 		'depends' => array(
-			'extbase' => '6.2.0-6.2.99',
-			'fluid' => '6.2.0-6.2.99',
-			'typo3' => '6.2.9-6.2.99',
+			'typo3' => '6.2.9-7.99.99',
 		),
 		'conflicts' => array(
 		),
